@@ -9,7 +9,7 @@ st.markdown("""##User can create or download AI created Resume based on high ATS
 
 #=========AGENT CODE==============
 #Step 2:Load Modules
-import IPython as ip
+
 import os
 import time
 import langchain
