@@ -81,24 +81,24 @@ def prompt_generator(agent=agent):
   with open('prompt.py', 'r') as f:
     prompt = f.read()
     return prompt
-   resume_maker_prompt()
+resume_maker_prompt()
   #==============RESUME GENERATOR==========
-  prompt="""you are a helpful AI assistance
- with job resume maker, your task is to give
- HTML format resume, with proper designing using recent CSS and JS
- code, with professional design format, user will upload data and return
- HTML format resume"""
- final_prompt=prompt+resume_maker_prompt()
+prompt="""you are a helpful AI assistance
+with job resume maker, your task is to give
+HTML format resume, with proper designing using recent CSS and JS
+code, with professional design format, user will upload data and return
+HTML format resume"""
+final_prompt=prompt+resume_maker_prompt()
 
- user_details="""user details: given below:
- give python developer resume"""
- query = final_prompt + user_details
+user_details="""user details: given below:
+give python developer resume"""
+query = final_prompt + user_details
 
- if st.button("Generate Resume")
-  with st.spinner("Running Agent...."):
-    
-    response=agent.invoke({'messages':[{'role':'user',
-                                    "content":query}]})
-    code=response['messages'][-1].content[-1]['text']
-    # st.markdown(code)
-      st.html(code,width="stretch",unsafe_allow_javascript=True)
+if st.button("Generate Resume")
+with st.spinner("Running Agent...."):
+
+response=agent.invoke({'messages':[{'role':'user',
+                                "content":query}]})
+code=response['messages'][-1].content[-1]['text']
+# st.markdown(code)
+  st.html(code,width="stretch",unsafe_allow_javascript=True)
