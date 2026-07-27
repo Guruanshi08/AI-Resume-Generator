@@ -75,7 +75,7 @@ def prompt_generator(agent=agent):
 
 prompt_generator(model)
  # tool 2
- def resume_maker_prompt():
+def resume_maker_prompt():
   """This function just gives updated prompt for model"""
 
   with open('prompt.py', 'r') as f:
