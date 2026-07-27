@@ -96,8 +96,7 @@ query = final_prompt + user_details
 
 if st.button("Generate Resume"):
     with st.spinner("Running Agent...."):
-
-    response=agent.invoke({'messages':[{'role':'user', "content":query}]})
-    code=response['messages'][-1].content[-1]['text']
+        response=agent.invoke({'messages':[{'role':'user', "content":query}]})
+        code=response['messages'][-1].content[-1]['text']
 # st.markdown(code)
-    st.html(code,width="stretch",unsafe_allow_javascript=True)
+        st.html(code,width="stretch",unsafe_allow_javascript=True)
