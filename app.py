@@ -22,11 +22,16 @@ from langchain.messages import SystemMessage,HumanMessage
 import numpy as np
 import streamlit as st
 from langchain_community.document_loaders import PyMuPDFLoader
+from PIL import Image
 
 GOOGLE_API_KEY=st.sidebar.text_input("GOOGLE_API_KEY",type="password")
 GROQ_API_KEY=st.sidebar.text_input("GROQ_API_KEY",type="password")
 TAVILY_API_KEY=st.sidebar.text_input("TAVILY_API_KEY",type="password")
-
+if not(GOOGLE_KEY_API) and not (GROQ_API_KEY) and not(TAVILY_API_KEY):
+    st.sidebar.warning("PASS API KEYS")
+    st.stop()
+else:
+    st.success("API KEYS LOADED")
 model = ChatGoogleGenerativeAI(
     model='gemini-3.5-flash',
     google_api_key = GOOGLE_API_KEY
@@ -82,6 +87,37 @@ def resume_maker_prompt():
     prompt = f.read()
     return prompt
 resume_maker_prompt()
+#=============UPLOAD IMAGE=================
+upload_file=st.sidebar.file_uploader(
+    "Choose an image file",
+    type=["jpg","jpeg","png","webp"]
+)
+if uploaded_file is not None:
+    try:
+        image=Image.open(uploaded_file)
+
+        st.sidebar.image(image,caption="Upload Image",use_container_width=True)
+
+        if image.mode in ("RGBA","P"):
+            image=image.convert("RGB")
+        base_name=os.path.splitext(uploaded_file.name)[0]
+        save_path=f"{base_name}.jpg"
+
+        #3. Save the image to the current working
+        image.save(save_path,"JPEG")
+        st.sidebar.success(f"Image successfully saved as'{save_path}!")
+
+except Exception as e:
+   st.error(f"Error processing image:{e}")
+        
+
+
+
+
+
+
+
+
   #==============RESUME GENERATOR==========
 prompt="""you are a helpful AI assistance
 with job resume maker, your task is to give
